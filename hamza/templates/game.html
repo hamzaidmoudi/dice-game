@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+</head>
+<body>
+    
+    <img src="" id="photo"></img src="">
+    <h1 id="title">MY JS GAME</h1>
+   <div  id="container">
+       <p id="nom" >PLAYER : {{nom}}   </p>
+       <div id="dice">
+           <img src="" id="img" height="180px" width="200px" >
+       </div><br>
+       <p id="game">YOUR SCORE:</p>
+       <p id="score">0</p>
+       <form action="/index" method="GET"></form><input type="submit" value="OUT" id="out" ></form>
+       <input type="submit" value="Roll" id="roll" >
+       <input type="submit" value="NEW GAME" id="new game" > 
+   </div>
+   <div id="sidebar">
+       <div id="lsc" name="lsc">LAST SCORES</div>
+       
+   </div>
+   <div id="namesbar">
+    <div id="lsc" name="lsc">NAMES</div>
+    
+</div>
+   {% for values in data %}
+       <p>{{values.nom}}</p>
+       {% endfor %} 
+
+</body>
+<script src="{{url_for('static', filename='script.js')}}"></script>
+</html>
