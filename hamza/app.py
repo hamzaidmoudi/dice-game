@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app=Flask(__name__)
 
+scs=0
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///testdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 app.config["SECRET_KEY"]="my secret key"
@@ -18,7 +19,7 @@ class Last_scores(db.Model):
 @app.route("/index")
 def index():
     #if session.get("nom") :
-     #   return redirect("/game")
+     #  return redirect("/game")
     return render_template("index.html")
 
 @app.route("/game",methods=['GET','POST'])#ila dert hna methods=['GET','POST'] kaymchi /game walkin kay3tini ghiir lpage dial index 
@@ -27,13 +28,15 @@ def index():
 def game():
     if request.method=="POST":
         if request.form["nom"] and request.form["mail"]:
-            '''session["nom"]=request.form["nom"]
             db.create_all()
-            nm = request.form["nom"]
-            items_instance = Last_scores(name=nm)
-            db.session.add(items_instance)
+            session["nom"]=request.form["nom"]
+            nm=session["nom"]
+            sc=scs
+            values=Last_scores(name=nm,scores=sc)
+            db.session.add(values)
             db.session.commit()
-            return render_template("game.html",nom=session["nom"],values=Last_scores.query.all())   '''
+            print(nm,sc)
+            return render_template("game.html",nom=session["nom"],lastscores=Last_scores.query.all())
             return render_template("game.html")
 
     return render_template("game.html")
@@ -41,9 +44,12 @@ def game():
 
 @app.route("/logout",methods=["Post"])
 def logout():
-    q = request.get_json()
-    print(q)
+    db.create_all()
+    q = request.json
+    scs=q
+    db.session.add(scs)
+    db.session.commit()
     return render_template("index.html")
 
-app.run(debug=True)
+app.run(debug=True,port=5000)
 

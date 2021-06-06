@@ -6,10 +6,10 @@ const out=document.getElementById("out")
 const game=document.getElementById("game")
 const lsc=document.getElementById("sidebar")
 
-var s=localStorage.getItem("last_scores")
+/*var s=localStorage.getItem("last_scores")
 let p = document.createElement("p");
 p.innerText=s
-lsc.appendChild(p) 
+lsc.appendChild(p) */
 
 let natija=0
 img.src="static/imgs/dice-0.png"
@@ -49,9 +49,11 @@ newgame.addEventListener("click",function(){
 out.addEventListener("click",function(){
     let postScore = new XMLHttpRequest()
     let jsonScores = JSON.stringify(scores)
-    console.log(jsonScores);
+
     postScore.open("POST","/logout",true)
+    postScore.setRequestHeader('Content-type','application/json')
     postScore.send(jsonScores)
+    window.location=("/index")
 })
 
 
