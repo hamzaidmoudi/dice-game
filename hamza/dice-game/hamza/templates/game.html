@@ -24,11 +24,16 @@
    </div>
    <div id="sidebar">
        <div id="lsc" name="lsc">LAST SCORES</div>
-       {% for values in data %}
-       <p>{{values.name}}</p>
-       <p>{{values.scores}}</p>
-       {% endfor %} 
+       <p>{{lastscores}}</p>
    </div>
+   <div id="namesbar">
+    <div id="lsc" name="lsc">NAMES</div>
+    
+</div>
+   {% for values in data %}
+       <p>{{values.nom}}</p>
+       {% endfor %} 
+
 </body>
 <script src="{{url_for('static', filename='script.js')}}"></script>
 </html>
